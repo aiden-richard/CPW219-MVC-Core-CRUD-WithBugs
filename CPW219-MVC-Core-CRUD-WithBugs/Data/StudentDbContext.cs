@@ -1,9 +1,10 @@
-﻿using System;
+﻿using CPW219_MVC_Core_CRUD_WithBugs.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using CPW219_MVC_Core_CRUD_WithBugs.Models;
 
 namespace CPW219_MVC_Core_CRUD_WithBugs.Data
 {
@@ -14,7 +15,12 @@ namespace CPW219_MVC_Core_CRUD_WithBugs.Data
         {
         }
 
-        public DbSet<CPW219_MVC_Core_CRUD_WithBugs.Models.Student> Student { get; set; } = default!;
+        public DbSet<Student> Student { get; set; } = default!;
+
+        protected override void OnConfiguring(DbContextOptionsBuilder options)
+        {
+            options.UseSqlite("Data Source=database.db");
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
