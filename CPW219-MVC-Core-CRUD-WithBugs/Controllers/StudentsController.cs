@@ -69,7 +69,7 @@ public class StudentsController : Controller
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult Create(Student student)
+    public async Task<IActionResult> Create(Student student)
     {
         if (ModelState.IsValid)
         {
@@ -101,7 +101,7 @@ public class StudentsController : Controller
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int id, Student student)
+    public  IActionResult Edit(int id, Student student)
     {
         if (id != student.StudentId)
         {
@@ -113,6 +113,7 @@ public class StudentsController : Controller
             try
             {
                 _context.Update(student);
+                _context.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -157,6 +158,7 @@ public class StudentsController : Controller
         if (student != null)
         {
             _context.Student.Remove(student);
+            _context.SaveChanges();
         }
 
         return RedirectToAction(nameof(Index));
