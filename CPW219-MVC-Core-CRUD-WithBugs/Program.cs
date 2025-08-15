@@ -2,8 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using CPW219_MVC_Core_CRUD_WithBugs.Data;
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<StudentDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("StudentDbContext") ?? throw new InvalidOperationException("Connection string 'StudentDbContext' not found.")));
+builder.Services.AddDbContext<StudentDbContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
